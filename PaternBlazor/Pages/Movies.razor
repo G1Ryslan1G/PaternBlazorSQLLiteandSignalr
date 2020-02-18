@@ -1,0 +1,49 @@
+﻿@page "/moviesdata"
+
+@using PaternBlazor.Model
+@using Microsoft.EntityFrameworkCore;
+@inject SQLLiteContext SqlContext
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (movies == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>ReleaseDate</th>
+                <th>Genre</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var movie in movies)
+            {
+                <tr>
+                    <td>@movie.ID</td>
+                    <td>@movie.Title</td>
+                    <th>@movie.ReleaseDate</th>
+                    <th>@movie.Genre</th>
+                    <th>@movie.Price</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IList<Movie> movies;
+
+    protected override async Task OnInitializedAsync()
+    {
+        movies = await SqlContext.Movies.ToListAsync();
+    }
+}
