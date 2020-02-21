@@ -12,6 +12,5 @@ namespace PaternBlazor.Model
         public DateTime ReleaseDate { get; set; }
         public string Genre { get; set; }
         public string Price { get; set; }
-        public int Count { get; set; }
     }
 }
