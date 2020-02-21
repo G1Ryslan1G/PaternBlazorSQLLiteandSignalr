@@ -27,7 +27,7 @@ else
         <tbody>
             @foreach (var movie in movies)
             {
-                <tr>
+                <tr @onclick="ChecMove(movie)">
                     <td>@movie.ID</td>
                     <td>@movie.Title</td>
                     <th>@movie.ReleaseDate</th>
@@ -41,9 +41,16 @@ else
 
 @code {
     private IList<Movie> movies;
+    private Movie _movie;
 
     protected override async Task OnInitializedAsync()
     {
         movies = await SqlContext.Movies.ToListAsync();
+    }
+
+    public EventCallback ChecMove(Movie movie)
+    {
+        _movie = movie;
+        return new EventCallback();
     }
 }
