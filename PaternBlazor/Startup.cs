@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using PaternBlazor.Data;
 using PaternBlazor.Model;
+using PaternBlazor.Hubs;
 
 namespace PaternBlazor
 {
@@ -25,8 +26,11 @@ namespace PaternBlazor
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddSignalR();
+
             services.AddDbContext<SQLLiteContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("SQLLiteContext")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +55,7 @@ namespace PaternBlazor
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();
+                endpoints.MapHub<DBHub>("/dbHub");
                 endpoints.MapFallbackToPage("/_Host");
             });
         }
