@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using PaternBlazor.Data;
 using PaternBlazor.Model;
 using PaternBlazor.Hubs;
+using PaternBlazor.Shared;
 
 namespace PaternBlazor
 {

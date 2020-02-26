@@ -22,7 +22,12 @@ namespace PaternBlazor.Shared
                     opt.SkipNegotiation = true;
                     opt.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets;
                 }).Build();
-            _hubConnections.StartAsync();
+            Start();
+        }
+
+        public async void Start()
+        {
+            await _hubConnections.StartAsync();
         }
     
         public async Task<bool> Athorizations(string login, string password)
