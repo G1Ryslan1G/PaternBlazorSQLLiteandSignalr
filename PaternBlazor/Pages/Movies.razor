@@ -1,8 +1,7 @@
 ﻿@page "/moviesdata"
 
 @using PaternBlazor.Model
-@using Microsoft.EntityFrameworkCore;
-@inject SQLLiteContext SqlContext
+@inject ClientConnection client
 
 <h1>Weather forecast</h1>
 
@@ -45,12 +44,12 @@ else
 }
 
 @code {
-    private IList<Movie> movies;
+    private Movie[] movies;
     private Movie _movie;
 
     protected override async Task OnInitializedAsync()
     {
-        movies = await SqlContext.Movies.ToListAsync();
+        movies = await client.Movies();
     }
 
     public EventCallback ChecMove(Movie movie)
