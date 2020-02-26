@@ -1,4 +1,6 @@
 ﻿@inherits LayoutComponentBase
+@using PaternBlazor.Model
+@inject User User;
 
 <div class="sidebar">
     <NavMenu />
@@ -6,7 +8,14 @@
     
 <div class="main">
     <div class="top-row px-4">
-        <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        @if (User == null)
+        {
+            <button href="/">Войти</button>
+        }
+        else
+        {
+            <button target="_blank">Выйти</button>
+        }
     </div>
 
     <div class="content px-4">
@@ -15,5 +24,4 @@
 </div>
 
 @code{
-    public ClientConnection client = new ClientConnection();
 }

@@ -6,27 +6,27 @@ using PaternBlazor.Model;
 
 namespace PaternBlazor.Shared
 {
-    public class ClientConnection
+    public class ClientConnection : ComponentBase
     {
+        [Inject]
         private HubConnection _hubConnections { get; set; }
 
-        public User _user { get; set; }
+        [Parameter]
+        public User User { get; set; }
 
+        [Parameter]
         public bool IsLogin { get; set; }
 
-        public ClientConnection()
+        protected override async Task OnInitializedAsync()
         {
+            new ClientConnection();
             _hubConnections = new HubConnectionBuilder()
                 .WithUrl("/dbHub", opt =>
                 {
                     opt.SkipNegotiation = true;
                     opt.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets;
                 }).Build();
-            Start();
-        }
 
-        public async void Start()
-        {
             await _hubConnections.StartAsync();
         }
     
