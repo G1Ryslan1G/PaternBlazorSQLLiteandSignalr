@@ -29,10 +29,9 @@
     [Parameter]
     public ClientConnection ClientConnection { get; set; }
 
-    protected override Task OnInitializedAsync()
+    protected async override Task OnInitializedAsync()
     {
-        User = new User();
-        ClientConnection = new ClientConnection();
-        return Task.CompletedTask;
+        User = null;
+        ClientConnection = await ClientConnection.CreateClientConnection();
     }
 }

@@ -23,19 +23,19 @@ namespace PaternBlazor.Shared
                     opt.SkipNegotiation = true;
                     opt.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets;
                 }).Build();
+            IsLogin = false;
+        }
 
-            _hubConnections.StartAsync();
+        public static async Task<ClientConnection> CreateClientConnection()
+        {
+            var client = new ClientConnection();
+            await client._hubConnections.StartAsync();
+            return client;
         }
     
-        public async Task<bool> Athorizations(string login, string password)
+        public Task<User> Athorizations(string login, string password)
         {
-            var user = await _hubConnections.InvokeAsync<User>("Authorizations", login, password);
-            if (user == null)
-            {
-                return false;
-            }
-
-            return true;
+            return _hubConnections.InvokeAsync<User>("Authorizations", login, password);
         }
 
         public  Task<Movie[]> Movies()
