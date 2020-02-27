@@ -6,18 +6,15 @@ using PaternBlazor.Model;
 
 namespace PaternBlazor.Shared
 {
-    public class ClientConnection : ComponentBase
+    public class ClientConnection
     {
         [Inject]
         private HubConnection _hubConnections { get; set; }
 
         [Parameter]
-        public User User { get; set; }
-
-        [Parameter]
         public bool IsLogin { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        public ClientConnection()
         {
             new ClientConnection();
             _hubConnections = new HubConnectionBuilder()
@@ -27,7 +24,7 @@ namespace PaternBlazor.Shared
                     opt.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets;
                 }).Build();
 
-            await _hubConnections.StartAsync();
+            _hubConnections.StartAsync();
         }
     
         public async Task<bool> Athorizations(string login, string password)

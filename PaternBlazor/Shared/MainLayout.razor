@@ -1,6 +1,5 @@
 ﻿@inherits LayoutComponentBase
 @using PaternBlazor.Model
-@inject User User;
 
 <div class="sidebar">
     <NavMenu />
@@ -24,4 +23,16 @@
 </div>
 
 @code{
+    [Parameter]
+    public User User { get; set; }
+
+    [Parameter]
+    public ClientConnection ClientConnection { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        User = new User();
+        ClientConnection = new ClientConnection();
+        return Task.CompletedTask;
+    }
 }

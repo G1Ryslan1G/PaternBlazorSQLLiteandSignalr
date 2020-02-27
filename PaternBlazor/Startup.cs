@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using PaternBlazor.Data;
 using PaternBlazor.Model;
 using PaternBlazor.Hubs;
-using PaternBlazor.Shared;
 
 namespace PaternBlazor
 {
@@ -31,7 +30,6 @@ namespace PaternBlazor
 
             services.AddDbContext<SQLLiteContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("SQLLiteContext")));
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
